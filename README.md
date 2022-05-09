@@ -16,12 +16,7 @@ All the following package should be added.
 |--|--|
 |[https://github.com/kakashiio/Unity-Reflection.git#1.0.0](https://github.com/kakashiio/Unity-Reflection.git#1.0.0)|Reflection Library|
 |[https://github.com/kakashiio/Unity-IOC.git#1.0.0](https://github.com/kakashiio/Unity-IOC.git#1.0.0)|IOC Library|
-|[https://github.com/kakashiio/Unity-IOC-Unity.git#1.0.0](https://github.com/kakashiio/Unity-IOC-Unity.git#1.0.0)|IOC-Unity Library|
 |[https://github.com/kakashiio/Unity-IOC-Event.git#1.0.0](https://github.com/kakashiio/Unity-IOC-Event.git#1.0.0)|IOC-Event Library|
-
-## Import Samples From Package Manager and run `Basic.unity` scene
-
-The basic usage of `UnityIOCContainer` is in the sample script `BasicDemo.cs`
 
 ## Create a `UnityIOCContainer` 
 
@@ -143,6 +138,11 @@ GameFlow OnProgress 100
 
 Amazing! Right? The `IOCContainer` & `EventManager` help you to register all the methods with `Event` attribute in the `IOCContainer` into the `EventManager`, so that when a `EventManager`'s `FireEvent` is invoke, the relevant method will be invoked automatically.
 
+## Run Samples
+
+You can also import Samples From Package Manager and run `Basic.unity` scene.
+
+The basic usage of `UnityIOCContainer` is in the sample script `BasicDemo.cs`
 
 # Future
 
