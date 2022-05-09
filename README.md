@@ -4,7 +4,7 @@ The `EventManager` for `IOCContainer`.
 
 # Tutorial
 
-[中文向导]()
+[中文向导](https://unity3d.io/2022/05/10/Unity-IOC-Event/)
 
 ## Add dependencies
 
