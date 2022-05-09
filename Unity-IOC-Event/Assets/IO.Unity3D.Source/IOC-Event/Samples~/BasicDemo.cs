@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using IO.Unity3D.Source.IOC;
-using IO.Unity3D.Source.IOCUnity;
 using IO.Unity3D.Source.Reflection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,10 +16,10 @@ namespace IO.Unity3D.Source.IOCEvent
             {
                 new TypeContainer(Assembly.GetExecutingAssembly()),
                 new TypeContainer(typeof(IOCComponent).Assembly),
-                new TypeContainer(typeof(UnityIOCContainer).Assembly),
                 new TypeContainer(typeof(EventManager).Assembly)
             });
-            new UnityIOCContainer(typeContainer);
+
+            new IOCContainerBuilder(typeContainer).Build();
         }
     }
 

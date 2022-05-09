@@ -106,13 +106,6 @@
       "dependencies": {},
       "hash": "d5f62d448f0d58afbe7562e176f5c4f927c0bb6c"
     },
-    "io.unity3d.source.iocunity": {
-      "version": "https://github.com/kakashiio/Unity-IOC-Unity.git#1.0.0",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "bcf2675de735a2197b5a19029a79ddc2a80ab8e1"
-    },
     "io.unity3d.source.reflection": {
       "version": "https://github.com/kakashiio/Unity-Reflection.git#1.0.0",
       "depth": 0,

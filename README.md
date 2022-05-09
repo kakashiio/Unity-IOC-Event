@@ -18,17 +18,17 @@ All the following package should be added.
 |[https://github.com/kakashiio/Unity-IOC.git#1.0.0](https://github.com/kakashiio/Unity-IOC.git#1.0.0)|IOC Library|
 |[https://github.com/kakashiio/Unity-IOC-Event.git#1.0.0](https://github.com/kakashiio/Unity-IOC-Event.git#1.0.0)|IOC-Event Library|
 
-## Create a `UnityIOCContainer` 
+## Create a `IOCContainer` 
 
 ```csharp
 ITypeContainer typeContainer = new TypeContainerCollection(new List<ITypeContainer>
     {
         new TypeContainer(Assembly.GetExecutingAssembly()),
         new TypeContainer(typeof(IOCComponent).Assembly),
-        new TypeContainer(typeof(UnityIOCContainer).Assembly),
         new TypeContainer(typeof(EventManager).Assembly)
     });
-    new UnityIOCContainer(typeContainer);
+
+    new IOCContainerBuilder(typeContainer).Build();
 ```
 
 Add the code above at the first your application is startup.
