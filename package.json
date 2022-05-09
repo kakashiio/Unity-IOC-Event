@@ -1,0 +1,21 @@
+{
+    "name": "io.unity3d.source.iocevent",
+    "displayName": "Source Framework IOC-Event",
+    "version": "1.0.0",
+    "unity": "2020.3",
+    "description": "Component in Source Framework - IOC EventManager for Unity",
+    "dependencies": {
+    },
+    "author": {
+        "name": "Kakashi",
+        "email": "john.cha@qq.com",
+        "url": "https://github.com/kakashiio/Unity-IOC-Event"
+    },
+    "samples": [
+        {
+            "displayName": "Baisc usage about the ioc EventManager",
+            "description": "Baisc usage about the ioc EventManager",
+            "path": "Samples~/Basic"
+        }
+    ]
+}
