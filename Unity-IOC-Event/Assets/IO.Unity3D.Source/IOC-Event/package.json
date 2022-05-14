@@ -16,6 +16,11 @@
             "displayName": "Baisc usage about the ioc EventManager",
             "description": "Baisc usage about the ioc EventManager",
             "path": "Samples~/Basic"
+        },
+        {
+            "displayName": "UI Event Sample with IOC-Event",
+            "description": "Demonstrate how to use IOC-Event to register and unregister event",
+            "path": "Samples~/UIEvent"
         }
     ]
 }
