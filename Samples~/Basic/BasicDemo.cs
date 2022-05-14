@@ -6,8 +6,9 @@ using IO.Unity3D.Source.Reflection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace IO.Unity3D.Source.IOCEvent
+namespace IO.Unity3D.Source.IOCEvent.Samples.Basic
 {
+
     public class BasicDemo : MonoBehaviour
     {
         void Start()
@@ -18,16 +19,33 @@ namespace IO.Unity3D.Source.IOCEvent
                 new TypeContainer(typeof(IOCComponent).Assembly),
                 new TypeContainer(typeof(EventManager).Assembly)
             });
-
+            
             new IOCContainerBuilder(typeContainer).Build();
         }
     }
 
-    class GameEvent
+    class EventInit : EventArg {}
+    
+    class EventFinishInit : EventArg {}
+
+    class EventLoadingMain : EventArg
     {
-        public const string EVT_INIT = nameof(EVT_INIT);
-        public const string EVT_LOAD_INIT_SCENE = nameof(EVT_LOAD_INIT_SCENE);
-        public const string EVT_INIT_PROGRESS = nameof(EVT_INIT_PROGRESS);
+        public float Progress;
+
+        public EventLoadingMain(float progress)
+        {
+            Progress = progress;
+        }
+    }
+    
+    class EventLoadedScene : EventArg
+    {
+        public Scene Scene;
+
+        public EventLoadedScene(Scene scene)
+        {
+            Scene = scene;
+        }
     }
 
     [IOCComponent]
@@ -35,7 +53,7 @@ namespace IO.Unity3D.Source.IOCEvent
     {
         [Autowired]
         private EventManager _EventManager;
-        
+
         public void BeforePropertiesOrFieldsSet()
         {
         }
@@ -46,8 +64,7 @@ namespace IO.Unity3D.Source.IOCEvent
 
         public void AfterAllInstanceInit()
         {
-            _EventManager.FireEvent(GameEvent.EVT_INIT_PROGRESS, 0f);
-            _EventManager.FireEvent(GameEvent.EVT_INIT);
+            _EventManager.FireEvent<EventInit>();
         }
     }
 
@@ -59,33 +76,48 @@ namespace IO.Unity3D.Source.IOCEvent
         [Autowired]
         private EventManager _EventManager;
         
-        [Event(GameEvent.EVT_INIT)]
-        public void OnInit()
+        [Event]
+        public void OnInit(EventInit eventInit)
         {
-            Debug.LogError("GameFlow OnInit");
-            _AssetLoader.LoadScene("ScenePath", (scene) => _EventManager.FireEvent(GameEvent.EVT_LOAD_INIT_SCENE, scene));
+            Debug.LogError("[GameFlow] OnInit");
+            _EventManager.FireEvent<EventFinishInit>();
         }
         
-        [Event(GameEvent.EVT_INIT_PROGRESS)]
-        public void OnProgress(float progress)
+        [Event]
+        public void OnFinishInit(EventFinishInit eventFinishInit)
         {
-            Debug.LogError("GameFlow OnProgress " + progress);
+            Debug.LogError("[GameFlow] OnFinishInit");
+            _EventManager.FireEvent(new EventLoadingMain(0));
+            _AssetLoader.LoadScene("ScenePath", (scene) =>
+            {
+                _EventManager.FireEvent(new EventLoadingMain(100));
+            });
         }
         
-        [Event(GameEvent.EVT_LOAD_INIT_SCENE)]
-        public void OnEnterInitScene(Scene scene)
+        [Event]
+        public void OnLoadingMain(EventLoadingMain eventLoadingMain)
         {
-            Debug.LogError($"GameFlow OnEnterInitScene scene={scene}");
-            _EventManager.FireEvent(GameEvent.EVT_INIT_PROGRESS, 100f);
+            Debug.LogError($"[GameFlow] OnLoadingMain {eventLoadingMain.Progress}");
+        }
+        
+        [Event]
+        public void OnEnterScene(EventLoadedScene eventLoadedScene)
+        {
+            Debug.LogError($"[GameFlow] OnEnterScene scene={eventLoadedScene.Scene}");
         }
     }
 
     [IOCComponent]
     class AssetLoader
     {
+        [Autowired]
+        private EventManager _EventManager;
+        
         public void LoadScene(string scenePath, Action<Scene> onLoadedScene)
         {
-            onLoadedScene(SceneManager.GetActiveScene());
+            var scene = SceneManager.GetActiveScene();
+            onLoadedScene(scene);
+            _EventManager.FireEvent(new EventLoadedScene(scene));
         }
     }
 }

@@ -1,0 +1,18 @@
+{
+    "name": "SourceFramework.IOCEvent.Sample.Basic",
+    "rootNamespace": "",
+    "references": [
+        "GUID:f3f065197088744f7bf80e387f6438c0",
+        "GUID:afbe72333035643ffa2efda51b9216a6",
+        "GUID:d36cc4c2a148b47b38bc06b3d5666f58"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

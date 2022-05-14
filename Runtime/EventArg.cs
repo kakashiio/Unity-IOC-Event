@@ -1,5 +1,3 @@
-using System;
-
 namespace IO.Unity3D.Source.IOCEvent
 {
     //******************************************
@@ -7,10 +5,9 @@ namespace IO.Unity3D.Source.IOCEvent
     //
     // @Author: Kakashi
     // @Email: john.cha@qq.com
-    // @Date: 2022-05-09 23:11
+    // @Date: 2022-05-14 13:35
     //******************************************
-    [AttributeUsage(AttributeTargets.Method)]
-    public class Event : Attribute
+    public class EventArg
     {
     }
 }
