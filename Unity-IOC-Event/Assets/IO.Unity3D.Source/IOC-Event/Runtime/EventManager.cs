@@ -99,6 +99,11 @@ namespace IO.Unity3D.Source.IOCEvent
         
         private void _Unregister(InstanceMethods instanceMethods)
         {
+            if (instanceMethods == null)
+            {
+                return;
+            }
+
             foreach (var methodInfo in instanceMethods.Methods)
             {
                 _Unregister(instanceMethods.Instance, methodInfo);
@@ -160,6 +165,11 @@ namespace IO.Unity3D.Source.IOCEvent
 
         private void _Register(InstanceMethods eventMethod, bool saveWrapperMapping = true)
         {
+            if (eventMethod == null)
+            {
+                return;
+            }
+
             var instance = eventMethod.Instance;
             foreach (var methodInfo in eventMethod.Methods)
             {
