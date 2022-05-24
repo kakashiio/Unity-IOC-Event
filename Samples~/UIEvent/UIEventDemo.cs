@@ -73,6 +73,7 @@ namespace IO.Unity3D.Source.IOCEvent.Samples.UIEvent
 
         public void AfterAllInstanceInit()
         {
+            _UIManager.Open<MainUI>((ui) => { });
             _UIManager.Open<BagUI>((ui) => { });
             _EventManager.FireEvent(new EventBagItemDataChange(1, 100));
             _EventManager.FireEvent(new EventBagItemDataChange(1, 200));
@@ -80,6 +81,7 @@ namespace IO.Unity3D.Source.IOCEvent.Samples.UIEvent
             _UIManager.Close<BagUI>();
             _EventManager.FireEvent(new EventBagItemDataChange(1, 300));
             _EventManager.FireEvent(new EventBagDeleteItem(2));
+            _UIManager.Close<MainUI>();
         }
     }
 
@@ -95,6 +97,10 @@ namespace IO.Unity3D.Source.IOCEvent.Samples.UIEvent
         {
             Debug.LogError($"[OnEventBagDeleteItem] {eventBagDeleteItem}");
         }
+    }
+
+    class MainUI
+    {
     }
 
     [IOCComponent]
